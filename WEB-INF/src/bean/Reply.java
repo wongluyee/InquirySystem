@@ -2,7 +2,7 @@ package bean;
 
 public class Reply {
 	private int replyId;
-	private int inquireId;
+	private int inquiryId;
 	private int userId;
 	private String subject;
 	private String contents;
@@ -16,12 +16,12 @@ public class Reply {
 		this.replyId = replyId;
 	}
 
-	public int getInquireId() {
-		return inquireId;
+	public int getInquiryId() {
+		return inquiryId;
 	}
 
-	public void setInquireId(int inquireId) {
-		this.inquireId = inquireId;
+	public void setInquiryId(int inquiryId) {
+		this.inquiryId = inquiryId;
 	}
 
 	public int getUserId() {

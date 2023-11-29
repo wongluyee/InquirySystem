@@ -3,6 +3,7 @@ package bean;
 public class Inquiry {
 	private int inquiryId;
 	private String email;
+	private String name;
 	private String sentAt;
 	private String category;
 	private String contents;
@@ -25,6 +26,14 @@ public class Inquiry {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getSentAt() {
