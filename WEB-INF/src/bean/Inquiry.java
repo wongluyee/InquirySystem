@@ -1,16 +1,33 @@
 package bean;
 
+import java.time.LocalDateTime;
+
 public class Inquiry {
 	private int inquiryId;
 	private String email;
 	private String name;
-	private String sentAt;
+	private LocalDateTime sentAt;
 	private String category;
 	private String contents;
 	private String age;
 	private String gender;
 	private String address;
-	private int isReplied;
+	private int isReplied = 0;
+
+	public Inquiry () {
+
+	}
+
+	public Inquiry (String email, String name, LocalDateTime sentAt, String category, String contents, String age, String gender, String address) {
+		this.email = email;
+		this.name = name;
+		this.sentAt = sentAt;
+		this.category = category;
+		this.contents = contents;
+		this.age = age;
+		this.gender = gender;
+		this.address = address;
+	}
 
 	public int getInquiryId() {
 		return inquiryId;
@@ -36,11 +53,11 @@ public class Inquiry {
 		this.name = name;
 	}
 
-	public String getSentAt() {
+	public LocalDateTime getSentAt() {
 		return sentAt;
 	}
 
-	public void setSentAt(String sentAt) {
+	public void setSentAt(LocalDateTime sentAt) {
 		this.sentAt = sentAt;
 	}
 

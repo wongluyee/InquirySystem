@@ -8,7 +8,7 @@ import bean.Inquiry;
 public class inquiryDAO {
 	// データベース接続情報
 	private static String RDB_DRIVE = "com.mysql.jdbc.Driver";
-	private static String URL = "jdbc:mysql://localhost/inquirydb";
+	private static String URL = "jdbc:mysql://localhost/inquirydb?characterEncoding=UTF-8";
 	private static String USER = "root";
 	private static String PASS = "root123";
 
@@ -47,7 +47,7 @@ public class inquiryDAO {
 				inquiry.setInquiryId(rs.getInt("id"));
 				inquiry.setEmail(rs.getString("email"));
 				inquiry.setName(rs.getString("name"));
-				inquiry.setSentAt(rs.getString("sent_at"));
+				inquiry.setSentAt(rs.getTimestamp("sent_at").toLocalDateTime());
 				inquiry.setCategory(rs.getString("category"));
 				inquiry.setContents(rs.getString("contents"));
 				inquiry.setAge(rs.getString("age"));
@@ -94,7 +94,7 @@ public class inquiryDAO {
 				inquiry.setInquiryId(rs.getInt("id"));
 				inquiry.setEmail(rs.getString("email"));
 				inquiry.setName(rs.getString("name"));
-				inquiry.setSentAt(rs.getString("sent_at"));
+				inquiry.setSentAt(rs.getTimestamp("sent_at").toLocalDateTime());
 				inquiry.setCategory(rs.getString("category"));
 				inquiry.setContents(rs.getString("contents"));
 				inquiry.setAge(rs.getString("age"));
@@ -128,10 +128,10 @@ public class inquiryDAO {
 		Statement smt = null;
 
 		try {
-			String sql = "INSERT INTO inquiry VALUES(" + inquiry.getEmail() + "','"
+			String sql = "INSERT INTO inquiry (email, name, sent_at, category, contents, age, gender, address) VALUES('" + inquiry.getEmail() + "','"
 					+ inquiry.getName() + "','" + inquiry.getSentAt() + "','" + inquiry.getCategory() + "','"
 					+ inquiry.getContents() + "','" + inquiry.getAge() + "','" + inquiry.getGender() + "','"
-					+ inquiry.getAddress() + "'," + inquiry.getIsReplied() + ")";
+					+ inquiry.getAddress() + "')";
 			con = getConnection();
 			smt = con.createStatement();
 			smt.executeUpdate(sql);

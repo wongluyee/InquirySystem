@@ -18,7 +18,9 @@
 		<% } %>
 
 		<% if (cmd != null && cmd.equals("logout")) { %>
-		<a class="btn btn-primary" href="<%= request.getContextPath() %>/logout">ログインページ</a>
+			<a class="btn btn-primary" href="<%= request.getContextPath() %>/logout">ログインページへ戻る</a>
+		<% } else if (cmd.equals("form")) { %>
+			<a class="btn btn-primary" href="<%= request.getContextPath() %>/view/inquiry.jsp">フォームページへ戻る</a>
 		<% } %>
 	</div>
 </body>
