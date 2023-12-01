@@ -1,12 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+	String error = (String) request.getAttribute("error");
+	String cmd = (String) request.getAttribute("cmd");
+%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<%@include file="../common/head.jsp"%>
+<title>エラー</title>
 </head>
 <body>
+	<div class="container">
+		<h3 class="my-3"><i class="fa-solid fa-triangle-exclamation"></i> エラー</h3>
+		<% if (error != null) { %>
+		<p><%= error %></p>
+		<% } %>
 
+		<% if (cmd != null && cmd.equals("logout")) { %>
+		<a class="btn btn-primary" href="<%= request.getContextPath() %>/logout">ログインページ</a>
+		<% } %>
+	</div>
 </body>
 </html>
