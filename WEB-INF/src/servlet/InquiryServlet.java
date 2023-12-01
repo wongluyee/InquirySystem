@@ -24,7 +24,7 @@ public class InquiryServlet extends HttpServlet {
 			// フォーム項目のパラメータを取得する
 			String email = request.getParameter("email");
 			String name = request.getParameter("name");
-			String category = request.getParameter("category");
+			int category = Integer.parseInt(request.getParameter("category"));
 			String contents = request.getParameter("contents");
 			String age = request.getParameter("age");
 			String gender = request.getParameter("gender");

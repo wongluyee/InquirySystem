@@ -8,7 +8,7 @@ import bean.Inquiry;
 public class inquiryDAO {
 	// データベース接続情報
 	private static String RDB_DRIVE = "com.mysql.jdbc.Driver";
-	private static String URL = "jdbc:mysql://localhost/inquirydb?characterEncoding=UTF-8";
+	private static String URL = "jdbc:mysql://localhost/inquirydb";
 	private static String USER = "root";
 	private static String PASS = "root123";
 
@@ -36,7 +36,7 @@ public class inquiryDAO {
 		ArrayList<Inquiry> inquiryList = new ArrayList<Inquiry>();
 
 		try {
-			String sql = "SELECT * FROM inquiry";
+			String sql = "SELECT * FROM inquiry ORDER BY sent_at DESC;";
 			con = getConnection();
 			smt = con.createStatement();
 			ResultSet rs = smt.executeQuery(sql);
@@ -48,7 +48,7 @@ public class inquiryDAO {
 				inquiry.setEmail(rs.getString("email"));
 				inquiry.setName(rs.getString("name"));
 				inquiry.setSentAt(rs.getTimestamp("sent_at").toLocalDateTime());
-				inquiry.setCategory(rs.getString("category"));
+				inquiry.setCategory(rs.getInt("category_id"));
 				inquiry.setContents(rs.getString("contents"));
 				inquiry.setAge(rs.getString("age"));
 				inquiry.setGender(rs.getString("gender"));
@@ -95,7 +95,7 @@ public class inquiryDAO {
 				inquiry.setEmail(rs.getString("email"));
 				inquiry.setName(rs.getString("name"));
 				inquiry.setSentAt(rs.getTimestamp("sent_at").toLocalDateTime());
-				inquiry.setCategory(rs.getString("category"));
+				inquiry.setCategory(rs.getInt("category"));
 				inquiry.setContents(rs.getString("contents"));
 				inquiry.setAge(rs.getString("age"));
 				inquiry.setGender(rs.getString("gender"));
@@ -129,7 +129,7 @@ public class inquiryDAO {
 
 		try {
 			String sql = "INSERT INTO inquiry (email, name, sent_at, category, contents, age, gender, address) VALUES('" + inquiry.getEmail() + "','"
-					+ inquiry.getName() + "','" + inquiry.getSentAt() + "','" + inquiry.getCategory() + "','"
+					+ inquiry.getName() + "','" + inquiry.getSentAt() + "'," + inquiry.getCategory() + ",'"
 					+ inquiry.getContents() + "','" + inquiry.getAge() + "','" + inquiry.getGender() + "','"
 					+ inquiry.getAddress() + "')";
 			con = getConnection();

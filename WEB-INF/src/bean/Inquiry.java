@@ -7,7 +7,7 @@ public class Inquiry {
 	private String email;
 	private String name;
 	private LocalDateTime sentAt;
-	private String category;
+	private int category;
 	private String contents;
 	private String age;
 	private String gender;
@@ -18,7 +18,7 @@ public class Inquiry {
 
 	}
 
-	public Inquiry (String email, String name, LocalDateTime sentAt, String category, String contents, String age, String gender, String address) {
+	public Inquiry (String email, String name, LocalDateTime sentAt, int category, String contents, String age, String gender, String address) {
 		this.email = email;
 		this.name = name;
 		this.sentAt = sentAt;
@@ -61,11 +61,11 @@ public class Inquiry {
 		this.sentAt = sentAt;
 	}
 
-	public String getCategory() {
+	public int getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(int category) {
 		this.category = category;
 	}
 

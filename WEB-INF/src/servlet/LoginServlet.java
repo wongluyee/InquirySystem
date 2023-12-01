@@ -50,6 +50,7 @@ public class LoginServlet extends HttpServlet {
 			}
 
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			error = "DB接続エラーの為、ログインはできませんでした。";
 		} catch (Exception e) {
 			e.printStackTrace();
