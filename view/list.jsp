@@ -73,7 +73,7 @@
 							break;
 						}
 				%>
-				<tr style="cursor: pointer;" onclick="document.location = 'https://www.google.com/';">
+				<tr style="cursor: pointer;" onclick="document.location = '<%= request.getContextPath() %>/show?id=<%= inquiry.getInquiryId() %>';">
 					<th scope="row"><%= inquiry.getInquiryId() %></th>
 					<td><%= inquiry.getName() %></td>
 					<td><%= categoryBadge %></td>

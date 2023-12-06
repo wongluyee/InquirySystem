@@ -95,7 +95,7 @@ public class inquiryDAO {
 				inquiry.setEmail(rs.getString("email"));
 				inquiry.setName(rs.getString("name"));
 				inquiry.setSentAt(rs.getTimestamp("sent_at").toLocalDateTime());
-				inquiry.setCategory(rs.getInt("category"));
+				inquiry.setCategory(rs.getInt("category_id"));
 				inquiry.setContents(rs.getString("contents"));
 				inquiry.setAge(rs.getString("age"));
 				inquiry.setGender(rs.getString("gender"));
@@ -128,10 +128,10 @@ public class inquiryDAO {
 		Statement smt = null;
 
 		try {
-			String sql = "INSERT INTO inquiry (email, name, sent_at, category, contents, age, gender, address) VALUES('" + inquiry.getEmail() + "','"
-					+ inquiry.getName() + "','" + inquiry.getSentAt() + "'," + inquiry.getCategory() + ",'"
-					+ inquiry.getContents() + "','" + inquiry.getAge() + "','" + inquiry.getGender() + "','"
-					+ inquiry.getAddress() + "')";
+			String sql = "INSERT INTO inquiry (email, name, sent_at, category_id, contents, age, gender, address) VALUES('"
+					+ inquiry.getEmail() + "','" + inquiry.getName() + "','" + inquiry.getSentAt() + "',"
+					+ inquiry.getCategory() + ",'" + inquiry.getContents() + "','" + inquiry.getAge() + "','"
+					+ inquiry.getGender() + "','" + inquiry.getAddress() + "')";
 			con = getConnection();
 			smt = con.createStatement();
 			smt.executeUpdate(sql);
@@ -152,5 +152,42 @@ public class inquiryDAO {
 				}
 			}
 		}
+	}
+
+	// 最後のIDを取得する
+	public int getLastId() {
+
+		Connection con = null;
+		Statement smt = null;
+
+		int inquiryId = 0;
+
+		try {
+			String sql = "SELECT MAX(ID) AS lastId FROM inquiry;";
+			con = getConnection();
+			smt = con.createStatement();
+			ResultSet rs = smt.executeQuery(sql);
+
+			if (rs.next()) {
+				inquiryId = rs.getInt("lastId");
+			}
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+		return inquiryId;
 	}
 }

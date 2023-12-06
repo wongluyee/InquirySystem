@@ -8,6 +8,7 @@ import javax.servlet.http.*;
 
 import bean.Inquiry;
 import dao.inquiryDAO;
+import util.SendMail;
 
 public class InquiryServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,12 +34,23 @@ public class InquiryServlet extends HttpServlet {
 			// お問い合わせ送信日時
 			LocalDateTime currentDateTime = LocalDateTime.now();
 
-
 			// Inquiryオブジェクトに格納
 			Inquiry inquiry = new Inquiry(email, name, currentDateTime, category, contents, age, gender, address);
 
 			// Inquiryオブジェクトに格納されたデータをデータベースに登録
 			inquiryDao.insert(inquiry);
+
+			// お問い合わせのIDを取得する
+			int inquiryId = inquiryDao.getLastId();
+
+			// 自動送信メール送信する
+			SendMail sendMail = new SendMail();
+			String subject = "#"+ inquiryId + " お問い合わせありがとうございます [自動送信]";
+
+			// メッセージ
+			String message = name + "様\n\nお問い合わせいただきありがとうございます。\n3営業日以内にご連絡いたしますので、今しばらくお待ちくださいませ。\n\n神田英会話スクール\n";
+
+			sendMail.sendEmail(email, subject, message);
 
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
@@ -49,7 +61,7 @@ public class InquiryServlet extends HttpServlet {
 		} finally {
 			if (error.equals("")) {
 				// フォワード
-				request.getRequestDispatcher("/view/inquirySent.jsp").forward(request,  response);
+				request.getRequestDispatcher("/view/inquirySent.jsp").forward(request, response);
 			} else {
 				cmd = "form";
 				request.setAttribute("error", error);
