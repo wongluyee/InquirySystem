@@ -13,7 +13,6 @@ import util.SendMail;
 public class InquiryServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String error = "";
-		String cmd = "";
 
 		try {
 			// inquiryDAOをインスタンス化し、insertメソッドを呼び出す
@@ -21,6 +20,7 @@ public class InquiryServlet extends HttpServlet {
 
 			// 画面からの入力情報を受け取るためのエンコードを設定
 			response.setContentType("text/html; charset=UTF-8");
+			request.setCharacterEncoding("UTF-8");
 
 			// フォーム項目のパラメータを取得する
 			String email = request.getParameter("email");
@@ -63,9 +63,7 @@ public class InquiryServlet extends HttpServlet {
 				// フォワード
 				request.getRequestDispatcher("/view/inquirySent.jsp").forward(request, response);
 			} else {
-				cmd = "form";
 				request.setAttribute("error", error);
-				request.setAttribute("cmd", cmd);
 				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 			}
 		}

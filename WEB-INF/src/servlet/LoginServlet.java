@@ -11,7 +11,6 @@ import dao.userDAO;
 public class LoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String error = "";
-		String cmd = "";
 
 		try {
 			// セッションオブジェクトの生成
@@ -57,9 +56,7 @@ public class LoginServlet extends HttpServlet {
 			error = "エラーが発生しました。しばらくしてからもう一度お試しください。<br>" + e;
 		} finally {
 			if (!error.equals("")) {
-				cmd = "logout";
 				request.setAttribute("error", error);
-				request.setAttribute("cmd", cmd);
 				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 			}
 		}

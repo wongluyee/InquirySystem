@@ -190,4 +190,33 @@ public class inquiryDAO {
 		}
 		return inquiryId;
 	}
+
+	// 返信済みかどうかのステータスを更新する
+	public void updateStatus(int inquiryId) {
+		Connection con = null;
+		Statement smt = null;
+
+		try {
+			String sql = "UPDATE inquiry SET is_replied=1 WHERE id=" + inquiryId + ";";
+			con = getConnection();
+			smt = con.createStatement();
+			smt.executeUpdate(sql);
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+	}
 }

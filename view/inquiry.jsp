@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div class="container">
-		<h1 class="my-3">お問い合わせフォーム</h1>
+		<h3 class="my-3">お問い合わせフォーム</h3>
 		<form action="<%= request.getContextPath() %>/inquiry"  method="GET">
 			<div class="form-group row mb-3">
 				<label for="email" class="col-sm-2 col-form-label">メールアドレス <span class="text-danger">*</span></label>

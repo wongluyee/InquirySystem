@@ -13,7 +13,7 @@
 <body>
 	<div class="container">
 		<div class="d-flex justify-content-between align-items-center">
-			<h1 class="my-3">お問い合わせ一覧</h1>
+			<h3 class="my-3">お問い合わせ一覧</h3>
 			<form action="<%= request.getContextPath() %>/logout" method="POST">
 				<button type="submit" class="btn btn-primary">ログアウト <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
 			</form>
@@ -21,7 +21,7 @@
 		<table class="table table-striped table-hover">
 			<thead>
 				<tr>
-					<th scope="col">No.</th>
+					<th scope="col">#</th>
 					<th scope="col">名前</th>
 					<th scope="col">種類</th>
 					<th scope="col">お問い合わせ日時</th>
@@ -35,7 +35,11 @@
 						Inquiry inquiry = (Inquiry) list.get(i);
 						String dateTimeString = inquiry.getSentAt().format(formatter);
 
-						String title = inquiry.getContents().substring(0, 46);
+						String title = inquiry.getContents();
+
+						if (title.length() > 45) {
+							title = inquiry.getContents().substring(0, 46) + "...";
+						}
 
 						int categoryId = inquiry.getCategory();
 						String categoryBadge = null;
@@ -78,7 +82,7 @@
 					<td><%= inquiry.getName() %></td>
 					<td><%= categoryBadge %></td>
 					<td><%= dateTimeString %></td>
-					<td><%= title %>...</td>
+					<td><%= title %></td>
 					<td><%= repliedBadge %></td>
 				</tr>
 				<% 	} %>

@@ -1,12 +1,26 @@
 package bean;
 
+import java.time.LocalDateTime;
+
 public class Reply {
 	private int replyId;
 	private int inquiryId;
 	private int userId;
 	private String subject;
 	private String contents;
-	private String repliedAt;
+	private LocalDateTime repliedAt;
+
+	public Reply() {
+
+	}
+
+	public Reply(int inquiryId, int userId, String subject, String contents, LocalDateTime currentDateTime) {
+		this.inquiryId = inquiryId;
+		this.userId = userId;
+		this.subject = subject;
+		this.contents = contents;
+		this.repliedAt = currentDateTime;
+	}
 
 	public int getReplyId() {
 		return replyId;
@@ -48,11 +62,11 @@ public class Reply {
 		this.contents = contents;
 	}
 
-	public String getRepliedAt() {
+	public LocalDateTime getRepliedAt() {
 		return repliedAt;
 	}
 
-	public void setRepliedAt(String repliedAt) {
+	public void setRepliedAt(LocalDateTime repliedAt) {
 		this.repliedAt = repliedAt;
 	}
 

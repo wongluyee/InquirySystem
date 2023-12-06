@@ -40,7 +40,7 @@ public class replyDAO {
 		ArrayList<Reply> replyList = new ArrayList<Reply>();
 
 		try {
-			String sql = "SELECT * FROM reply WHERE inquiry_id = '" + inquiryId + "'";
+			String sql = "SELECT * FROM reply WHERE inquiry_id = '" + inquiryId + "' ORDER BY replied_at";
 			con = getConnection();
 			smt = con.createStatement();
 			ResultSet rs = smt.executeQuery(sql);
@@ -53,7 +53,7 @@ public class replyDAO {
 				reply.setUserId(rs.getInt("user_id"));
 				reply.setSubject(rs.getString("subject"));
 				reply.setContents(rs.getString("contents"));
-				reply.setRepliedAt(rs.getString("replied_at"));
+				reply.setRepliedAt(rs.getTimestamp("replied_at").toLocalDateTime());
 				replyList.add(reply);
 			}
 		} catch (Exception e) {
@@ -82,7 +82,7 @@ public class replyDAO {
 		Statement smt = null;
 
 		try {
-			String sql = "INSERT INTO reply VALUES(" + reply.getInquiryId() + ","
+			String sql = "INSERT INTO reply(inquiry_id, user_id, subject, contents, replied_at) VALUES(" + reply.getInquiryId() + ","
 					+ reply.getUserId() + ",'" + reply.getSubject() + "','" + reply.getContents() + "','"
 					+ reply.getRepliedAt() + "')";
 			con = getConnection();
@@ -106,4 +106,6 @@ public class replyDAO {
 			}
 		}
 	}
+
+
 }

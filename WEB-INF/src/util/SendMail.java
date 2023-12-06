@@ -1,6 +1,8 @@
 package util;
 
 import java.util.Properties;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Date;
 
 import javax.mail.PasswordAuthentication;
@@ -12,8 +14,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.InternetAddress;
 
 public class SendMail {
-
-	public void sendEmail (String toEmail, String subject, String message) throws MessagingException {
+	private static Session getSession() {
 		try {
 			Properties props = System.getProperties();
 
@@ -24,20 +25,30 @@ public class SendMail {
 			props.put("mail.smtp.port", "587");
 			props.put("mail.smtp.debug", "true");
 
-			Session session = Session.getInstance(
-				props,
-				new javax.mail.Authenticator() {
-					protected PasswordAuthentication getPasswordAuthentication() {
-						//メールサーバにログインするメールアドレスとパスワードを設定
-						return new PasswordAuthentication("system.project.team01@kanda-it-school-system.com", "iisyAeByMearp4f");
-					}
+			Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					// メールサーバにログインするメールアドレスとパスワードを設定
+					return new PasswordAuthentication("system.project.team01@kanda-it-school-system.com",
+							"iisyAeByMearp4f");
 				}
-			);
+			});
+
+			return session;
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		}
+	}
+
+	public void sendEmail(String toEmail, String subject, String message) throws MessagingException {
+		try {
+			Session session = getSession();
 
 			MimeMessage mimeMessage = new MimeMessage(session);
 
 			// 送信元メールアドレスと送信者名を指定
-			mimeMessage.setFrom(new InternetAddress("system.project.team01@kanda-it-school-system.com", "神田英会話スクール", "iso-2022-jp"));
+			mimeMessage.setFrom(new InternetAddress("system.project.team01@kanda-it-school-system.com", "神田英会話スクール",
+					"iso-2022-jp"));
 
 			// 送信先メールアドレスを指定
 			mimeMessage.setRecipients(Message.RecipientType.TO, toEmail);

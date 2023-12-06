@@ -17,12 +17,10 @@
 		<p><%= error %></p>
 		<% } %>
 
-		<% if (cmd != null && cmd.equals("logout")) { %>
-			<form action="<%= request.getContextPath() %>/logout" method="POST">
-				<button type="submit" class="btn btn-primary">ログインページへ戻る</button>
-			</form>
-		<% } else if (cmd.equals("form")) { %>
-			<a class="btn btn-primary" href="<%= request.getContextPath() %>/view/inquiry.jsp">フォームページへ戻る</a>
+		<% if (cmd != null & cmd.equals("logout")) { %>
+			<a class="btn btn-primary" href="<%= request.getContextPath() %>/view/login.jsp">ログインページ</a>
+		<% } else { %>
+			<button class="btn btn-primary" onclick="history.back()">戻る</button>
 		<% } %>
 	</div>
 </body>
