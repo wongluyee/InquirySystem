@@ -26,7 +26,10 @@
 </head>
 <body>
 	<div class="container">
-		<h3 class="my-3">ログイン</h3>
+		<div class="d-flex justify-content-between align-items-center">
+			<h3 class="my-3">ログイン</h3>
+			<a href="<%= request.getContextPath() %>/view/home.jsp" class="btn btn-primary">ホームへ戻る</a>
+		</div>
 		<% if (message != null) { %>
 		<h5><%= message %></h5>
 		<% }%>

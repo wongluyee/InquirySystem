@@ -66,6 +66,8 @@
 			for (int i = 0; i < list.size(); i++) {
 				Reply reply = (Reply) list.get(i);
 				String repliedAt = reply.getRepliedAt().format(formatter);
+				String contents = reply.getContents();
+				contents = contents.replace("\n", "<br>");
 			%>
 				<div class="card border-secondary mb-3">
 					<div class="card-header">
@@ -73,7 +75,7 @@
 						<span><%= repliedAt %></span>
 					</div>
 					<div class="card-body">
-						<%= reply.getContents() %>
+						<%= contents %>
 					</div>
 				</div>
 			<% } %>
@@ -85,7 +87,7 @@
 			<div class="card-body">
 				<form action="<%= request.getContextPath() %>/reply" method="GET">
 					<div class="mb-3">
-						<textarea class="form-control" name="contents" rows="8"></textarea>
+						<textarea required class="form-control" name="contents" rows="8"></textarea>
 					</div>
 					<input type="hidden" name="email" value="<%= inquiry.getEmail() %>">
 					<input type="hidden" name="id" value="<%= inquiry.getInquiryId() %>">

@@ -8,7 +8,10 @@
 </head>
 <body>
 	<div class="container">
-		<h3 class="my-3">お問い合わせフォーム</h3>
+		<div class="d-flex justify-content-between align-items-center">
+			<h3 class="my-3">お問い合わせフォーム</h3>
+			<a href="<%= request.getContextPath() %>/view/home.jsp" class="btn btn-primary">ホームへ戻る</a>
+		</div>
 		<form action="<%= request.getContextPath() %>/inquiry"  method="GET">
 			<div class="form-group row mb-3">
 				<label for="email" class="col-sm-2 col-form-label">メールアドレス <span class="text-danger">*</span></label>
@@ -101,6 +104,5 @@
 			<button type="submit" class="btn btn-primary" style="float: right">送信</button>
 		</form>
 	</div>
-
 </body>
 </html>

@@ -74,8 +74,9 @@ public class ReplyServlet extends HttpServlet {
 			error = "エラーが発生しました。しばらくしてからもう一度お試しください。<br>" + e;
 		} finally {
 			if (error.equals("")) {
-				// フォワード
-				request.getRequestDispatcher("/show?id=" + inquiryId).forward(request, response);
+//				request.getRequestDispatcher("/show?id=" + inquiryId).forward(request, response);
+				// Redirect user back to the show page to avoid user refresh page and submit form again
+				response.sendRedirect(request.getContextPath() + "/show?id=" + inquiryId);
 			} else {
 				request.setAttribute("error", error);
 				request.setAttribute("cmd", cmd);

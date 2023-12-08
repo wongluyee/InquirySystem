@@ -14,9 +14,12 @@
 	<div class="container">
 		<div class="d-flex justify-content-between align-items-center">
 			<h3 class="my-3">お問い合わせ一覧</h3>
-			<form action="<%= request.getContextPath() %>/logout" method="POST">
-				<button type="submit" class="btn btn-primary">ログアウト <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
-			</form>
+			<div class="d-flex gap-1">
+				<a class="btn btn-primary" href="<%= request.getContextPath() %>/view/home.jsp">ホーム <i class="fa-solid fa-house"></i></a>
+				<form action="<%= request.getContextPath() %>/logout" method="POST">
+					<button type="submit" class="btn btn-primary">ログアウト <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+				</form>
+			</div>
 		</div>
 		<table class="table table-striped table-hover">
 			<thead>
